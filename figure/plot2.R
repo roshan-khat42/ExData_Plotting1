@@ -9,11 +9,13 @@ dat$Date <- as.Date(strptime(as.character(dat$Date),
 dat <- subset(dat, Date >= "2007-02-01" & Date <= "2007-02-02")
 dat <- dat[complete.cases(dat), ]
 
+dat$Date <- as.POSIXct(paste(dat$Date, dat$Time), format="%Y-%m-%d %H:%M:%S")
 
-png(file="plot1.png",
+png(file="plot2.png",
     width=480, height=480)
-hist(dat$Global_active_power, 
-     col = "red", 
-     xlab = "Global Active Power (kilowatts)", 
-     main = "Global Active Power")
+plot(x = dat$Date, 
+     y = dat$Global_active_power, 
+     type = "l", lty = 1,
+     xlab = "",
+     ylab = "Global Active Power (kilowatts)")
 dev.off()
